@@ -1,0 +1,60 @@
+<div class="container" style="overflow: hidden">
+  <div class="glass-container">
+    <div id="form-view">
+      <div class="icon-container">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+          <path d="M6 12v5c3 3 9 3 12 0v-5" />
+        </svg>
+      </div>
+      <h1>Chúc mừng ngày 20/11!!!</h1>
+      <p class="subtitle">Thầy/cô vui lòng nhập tên mình vào để có một ✨bất
+        ngờ✨</p>
+      <form id="nameForm" class="form">
+        <input
+          type="text"
+          id="nameInput"
+          class="input-glass"
+          placeholder="Tên thầy/cô. Ví dụ: Ngân,..."
+          required
+        />
+        <button type="submit" class="btn-glass">Nhận quà!!!</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="loading-container" style="display: none;">
+  <div class="loader"></div>
+</div>
+
+<div class="light-container">
+  <div class="bright-spot"></div>
+</div>
+
+<div class="envelope-container" style="display: none;">
+  <div class="envelope-wrapper">
+    <div class="envelope">
+
+    </div>
+  </div>
+  <div class="letter">
+    <h1 class="typewriter" id="text"></h1>
+    <img
+      src="/Static/Images/CHÀO MỪNG NGÀY 2011.png"
+      style="width: 100%;
+    height: 100%;"
+    />
+  </div>
+</div>
+
+<canvas id="Canvas"></canvas>

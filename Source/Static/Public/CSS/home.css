@@ -1,0 +1,353 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+:root {
+  --primary: #fff;
+  --bg-color: rgb(5, 53, 61);
+  --bg-envelope-color: #f5edd1;
+  --envelope-tab: #ecdeb8;
+  --envelope-cover: #e6cfa7;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --txt-color: #444;
+  --heart-color: rgb(252, 8, 231);
+}
+
+/*Loading Styles*/
+
+.loading-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  width: 50px;
+  z-index: 999;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 8px solid #514b82;
+  animation: l20-1 0.8s infinite linear alternate, l20-2 1.6s infinite linear;
+}
+@keyframes l20-1 {
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%);
+  }
+  12.5% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 0%,
+      100% 0%,
+      100% 0%
+    );
+  }
+  25% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 100%,
+      100% 100%,
+      100% 100%
+    );
+  }
+  50% {
+    clip-path: polygon(
+      50% 50%,
+      0 0,
+      50% 0%,
+      100% 0%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+  62.5% {
+    clip-path: polygon(
+      50% 50%,
+      100% 0,
+      100% 0%,
+      100% 0%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+  75% {
+    clip-path: polygon(
+      50% 50%,
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      100% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+  100% {
+    clip-path: polygon(
+      50% 50%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      50% 100%,
+      0% 100%
+    );
+  }
+}
+@keyframes l20-2 {
+  0% {
+    transform: scaleY(1) rotate(0deg);
+  }
+  49.99% {
+    transform: scaleY(1) rotate(135deg);
+  }
+  50% {
+    transform: scaleY(-1) rotate(0deg);
+  }
+  100% {
+    transform: scaleY(-1) rotate(-135deg);
+  }
+}
+
+/* Light Animation*/
+
+.light-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: absolute;
+  pointer-events: none; /* Prevent unnecessary event handling */
+}
+
+.bright-spot {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(255, 255, 255, 0.1) 30%,
+    rgba(255, 255, 255, 0) 80%
+  );
+  position: absolute;
+  opacity: 0;
+  transform: scale(1);
+  will-change: transform, opacity; /* Hint browser about animated properties */
+  display: block; /* Always display and use opacity instead */
+}
+
+.expandLight {
+  animation: expandLight 6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  filter: blur(8px); /* Reduced blur for better performance */
+  transform: translateZ(0); /* Force GPU acceleration */
+  backface-visibility: hidden; /* Reduce composite layers */
+  perspective: 1000px;
+}
+
+@keyframes expandLight {
+  0% {
+    transform: scale(1) translateZ(0);
+    opacity: 0.4;
+  }
+  40% {
+    transform: scale(25) translateZ(0);
+    opacity: 1;
+    background-color: white;
+  }
+  100% {
+    transform: scale(1) translateZ(0);
+    opacity: 0;
+  }
+}
+
+/* Envelope Styles*/
+
+.envelope-container {
+  position: relative;
+  height: 100vh;
+  width: 594px;
+  animation: goUpEnvelope 3s ease-in-out forwards;
+  margin: auto;
+}
+
+@keyframes goUpEnvelope {
+  0% {
+    bottom: -800px;
+  }
+  100% {
+    bottom: 0;
+  }
+}
+
+.envelope-container > .envelope-wrapper {
+  position: absolute;
+  background: var(--bg-envelope-color);
+  box-shadow: 0 0 40px var(--shadow-color);
+  transition: all 1s ease-in-out 1s;
+  bottom: 50%;
+  margin-bottom: -50%;
+  width: 594px;
+  height: 630px;
+}
+
+.envelope-wrapper > .envelope {
+  position: relative;
+  width: 594px;
+  height: 630px;
+}
+
+.envelope-wrapper > .envelope::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  border-top: 160px solid var(--envelope-tab);
+  border-right: 297px solid transparent;
+  border-left: 298px solid transparent;
+  transform-origin: top;
+  transition: all 0.5s ease-in-out 2s;
+}
+
+.envelope-wrapper > .envelope::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  width: 0px;
+  height: 0px;
+  border-top: 160px solid transparent;
+  border-right: 297px solid var(--envelope-cover);
+  border-bottom: 471px solid var(--envelope-cover);
+  border-left: 298px solid var(--envelope-cover);
+}
+
+.letter {
+  position: absolute;
+  bottom: 50%;
+  margin-bottom: -50%;
+  width: 594px;
+  height: 630px;
+  background: var(--primary);
+  text-align: center;
+  transition: all 1s ease-in-out;
+  box-shadow: 0 0 5px var(--shadow-color);
+}
+
+.flap > .envelope:before {
+  transform: rotateX(180deg);
+  z-index: 0;
+  transition: all 0.5s ease-in-out 0.7s !important;
+}
+
+.flap {
+  /* Adjust the 50px value as needed for downward movement */
+  bottom: -800px !important;
+  margin-bottom: 0% !important;
+  transition-delay: 1s;
+}
+
+/* Style cho hiệu ứng gõ chữ */
+.typewriter {
+  font-size: 1.4em;
+  color: #333;
+  word-break: keep-all;
+  overflow: hidden;
+  width: auto;
+  animation: blink 0.7s steps(1) infinite;
+  position: absolute;
+  width: 404px;
+  height: 411px;
+  margin: 180px 101px;
+  text-align: left;
+  box-sizing: border-box;
+  white-space: pre-line;
+  line-height: 38px;
+  font-family: "Dancing Script", cursive;
+  overflow: auto;
+}
+
+/* Lớp ẩn con nháy */
+.hide-cursor {
+  border-right: none;
+}
+
+@media (max-width: 500px) {
+  .envelope-container {
+    width: 396px;
+  }
+
+  .envelope-wrapper > .envelope::before {
+    border-top: 152px solid var(--envelope-tab);
+    border-right: 198px solid transparent;
+    border-left: 199px solid transparent;
+  }
+
+  .envelope-wrapper > .envelope::after {
+    border-top: 150px solid transparent;
+    border-right: 198px solid var(--envelope-cover);
+    border-bottom: 271px solid var(--envelope-cover);
+    border-left: 199px solid var(--envelope-cover);
+  }
+
+  .letter {
+    width: 396px;
+    height: 420px;
+  }
+
+  .flap {
+    bottom: -575px !important;
+  }
+
+  .envelope-container > .envelope-wrapper {
+    width: 396px;
+    height: 420px;
+  }
+
+  .typewriter {
+    font-size: 1rem;
+    margin: 126px 68px;
+    line-height: 25px;
+    width: 262px;
+    height: 260px;
+    line-height: 24px;
+  }
+}
+
+/* Firework Styles */
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: transparent;
+}
+
+html {
+  overflow: hidden;
+}
+
+body {
+  background-image: url("/Static/Images/bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+.glass-container {
+  background: rgb(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(0px) !important;
+}
